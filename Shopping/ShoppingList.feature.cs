@@ -32,8 +32,18 @@ namespace Shopping
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ShoppingList", "In order to to calculate the total shopping price\r\nAs a checkout till\r\nI want to " +
-                    "be told the sum of products", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ShoppingList", @"In order to to calculate the total shopping price
+As a checkout till
+I want to be told the sum of products
+
+Rules:
+Item   Unit      Special
+       Price     Price
+--------------------------
+  A     50       3 for 130
+  B     30       2 for 45   - i.e. buy 1 get one half price
+  C     20       2 for 20   - i.e  buy 1 get on free
+  D     15", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,67 +75,99 @@ namespace Shopping
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Total of 1 simple Item")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void TotalOf1SimpleItem()
+        public virtual void FeatureBackground()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 1 simple Item", new string[] {
-                        "mytag"});
-#line 8
-this.ScenarioSetup(scenarioInfo);
-#line 9
- testRunner.Given("I have 1 Product \'A\' with price 10.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
- testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
- testRunner.Then("the total price should be 10.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Total of 2 simple Items")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void TotalOf2SimpleItems()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 2 simple Items", new string[] {
-                        "mytag"});
-#line 14
-this.ScenarioSetup(scenarioInfo);
-#line 15
- testRunner.Given("I have 2 Product \'A\' with price 10.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 16
- testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
- testRunner.Then("the total price should be 20.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Total of Multiple Simple Items")]
-        public virtual void TotalOfMultipleSimpleItems()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of Multiple Simple Items", ((string[])(null)));
-#line 19
-this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Sku",
-                        "Price"});
+                        "Price",
+                        "Rule"});
             table1.AddRow(new string[] {
-                        "\"Apple\"",
-                        "10.0"});
+                        "A",
+                        "50",
+                        "3 > 130"});
             table1.AddRow(new string[] {
-                        "\"Banana\"",
-                        "30.0"});
-#line 20
- testRunner.Given("I have the following items:", ((string)(null)), table1, "Given ");
-#line 24
- testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                        "B",
+                        "30",
+                        "2 > 45"});
+            table1.AddRow(new string[] {
+                        "C",
+                        "20",
+                        "2 > 20"});
+            table1.AddRow(new string[] {
+                        "D",
+                        "15",
+                        ""});
+#line 17
+    testRunner.Given("the following pricing rules", ((string)(null)), table1, "Given ");
+#line hidden
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Total of 1 simple Item That does not qualify for any rules")]
+        public virtual void TotalOf1SimpleItemThatDoesNotQualifyForAnyRules()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 1 simple Item That does not qualify for any rules", ((string[])(null)));
 #line 25
- testRunner.Then("the total price should be 40.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line 26
+ testRunner.Given("I have 1 Product \'D\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 27
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+ testRunner.Then("the total price should be 15.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Total of 2 same simple Items That do not qualify for any rules")]
+        public virtual void TotalOf2SameSimpleItemsThatDoNotQualifyForAnyRules()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 2 same simple Items That do not qualify for any rules", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line 31
+ testRunner.Given("I have 2 Product \'D\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+ testRunner.Then("the total price should be 30.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Total of Multiple different Items That do not qualify for any rules")]
+        public virtual void TotalOfMultipleDifferentItemsThatDoNotQualifyForAnyRules()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of Multiple different Items That do not qualify for any rules", ((string[])(null)));
+#line 35
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table2.AddRow(new string[] {
+                        "D"});
+            table2.AddRow(new string[] {
+                        "A"});
+            table2.AddRow(new string[] {
+                        "B"});
+            table2.AddRow(new string[] {
+                        "D"});
+#line 36
+ testRunner.Given("I have the following items:", ((string)(null)), table2, "Given ");
+#line 42
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 43
+ testRunner.Then("the total price should be 110.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

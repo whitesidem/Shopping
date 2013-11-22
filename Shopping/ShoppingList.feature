@@ -3,25 +3,43 @@
 	As a checkout till
 	I want to be told the sum of products
 
+Rules:
+ Item   Unit      Special
+         Price     Price
+  --------------------------
+    A     50       3 for 130
+    B     30       2 for 45   - i.e. buy 1 get one half price
+    C     20       2 for 20   - i.e  buy 1 get on free
+    D     15
 
-@mytag
-Scenario: Total of 1 simple Item
-	Given I have 1 Product 'A' with price 10.00
+
+Background:
+    Given the following pricing rules
+    | Sku | Price	 | Rule    |
+    | A     | 50     | 3 > 130 |
+    | B     | 30     | 2 > 45  |
+    | C     | 20     | 2 > 20  |
+    | D     | 15     |         |
+
+
+Scenario: Total of 1 simple Item That does not qualify for any rules
+	Given I have 1 Product 'D' 
 	When I calculate the total
-	Then the total price should be 10.00
+	Then the total price should be 15.00
 
-@mytag
-Scenario: Total of 2 simple Items
-	Given I have 2 Product 'A' with price 10.00
+Scenario: Total of 2 same simple Items That do not qualify for any rules
+	Given I have 2 Product 'D' 
 	When I calculate the total
-	Then the total price should be 20.00
+	Then the total price should be 30.00
 
-Scenario: Total of Multiple Simple Items
+Scenario: Total of Multiple different Items That do not qualify for any rules
 	Given I have the following items:
-	    | Sku   | Price | 
-		| "Apple" | 10.0   |
-		| "Banana" | 30.0  |
+	    | Sku	|  
+		| D	|
+		| A	| 
+		| B	|
+		| D	|
 	When I calculate the total
-	Then the total price should be 40.00
+	Then the total price should be 110.00
 
 

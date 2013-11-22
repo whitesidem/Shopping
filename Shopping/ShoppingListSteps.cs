@@ -18,12 +18,24 @@ namespace Shopping
             _checkoutTill = new CheckoutTill();
         }
 
-        [Given(@"I have (.*) Product '(.*)' with price (.*)")]
-        public void GivenIHaveProductWithPrice(int qty, string sku, Decimal price)
+        [Given(@"the following pricing rules")]
+        public void GivenTheFollowingPricingRules(Table table)
+        {
+            var rules = table.CreateDynamicSet().ToList();
+            foreach (dynamic rule in rules)
+            {
+                _checkoutTill.AddPricingRule((string)rule.Sku, (Decimal)rule.Price, (string)rule.Rule);
+            }
+        }
+
+
+
+        [Given(@"I have (.*) Product '(.*)'")]
+        public void GivenIHaveProductWithPrice(int qty, string sku)
         {
             for (var i = 0; i < qty; i++)
             {
-                _checkoutTill.AddItem(sku, price);
+                _checkoutTill.AddItem(sku);
             }
         }
 
@@ -33,7 +45,7 @@ namespace Shopping
             var items = table.CreateDynamicSet().ToList();
             foreach (dynamic item in items)
             {
-                _checkoutTill.AddItem((string)item.Sku, (Decimal)item.Price);
+                _checkoutTill.AddItem((string)item.Sku);
             }
             // Get<IEnumerable<dynamic>>("Products")
         }
