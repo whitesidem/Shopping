@@ -1,7 +1,8 @@
 ﻿Feature: ShoppingList
-	In order to to calculate the total shopping price
-	As a checkout till
-	I want to be told the sum of products
+	In order to to calculate the total shopping price for scanned items
+	As a checkout till's printout
+	I want to be told the sum of products after applying dicount rules
+	And I wnt an itemised list including the discounts
 
 Rules:
  Item   Unit      Special

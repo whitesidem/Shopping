@@ -14,12 +14,6 @@ namespace Shopping
     {
         private ICheckoutTill _checkoutTill;
 
-
-        [BeforeScenario] 
-        public  void BeforeScenario()
-        {
-        }
-
         [Given(@"the following pricing rules")]
         public void GivenTheFollowingPricingRules(Table table)
         {
@@ -51,7 +45,6 @@ namespace Shopping
             {
                 _checkoutTill.ScanItem((string)item.Sku);
             }
-            // Get<IEnumerable<dynamic>>("Products")
         }
 
         
