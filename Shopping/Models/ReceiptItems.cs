@@ -22,9 +22,15 @@ namespace Shopping.Models
             }
         }
 
-        public void AddReceiptitem(string sku, decimal price)
+        public void AddReceiptItem(string sku, decimal price)
         {
             _receiptItems.Add(new ReceiptItem(sku, price));
         }
+
+        public void AddReceiptDiscount(string sku, decimal discount, string description)
+        {
+            _receiptItems.Add(new ReceiptItem(sku, discount, description));
+        }
+
     }
 }

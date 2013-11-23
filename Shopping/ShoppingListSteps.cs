@@ -65,7 +65,7 @@ namespace Shopping
         public void ThenTheTotalPriceShouldBe(Decimal expectedTotal)
         {
             var total = ScenarioContext.Current["total"];
-            Assert.That(total, Is.EqualTo(expectedTotal));
+            Assert.That(expectedTotal, Is.EqualTo(total));
         }
 
         [When(@"I request receipt items")]
@@ -78,7 +78,7 @@ namespace Shopping
         public void ThenWillContainReceiptItems(int qty)
         {
             var actualItems = ScenarioContext.Current.Get<IList<ReceiptItem>>("Receptitems");
-            Assert.That(qty, Is.EqualTo(actualItems.Count));
+            Assert.That(actualItems.Count, Is.EqualTo(qty));
         }
 
 
@@ -89,8 +89,9 @@ namespace Shopping
             var actualItems = ScenarioContext.Current.Get<IList<ReceiptItem>>("Receptitems");
             for (var i = 0; i < expectedItems.Count; i++)
             {
-                Assert.That(expectedItems[i].Desc, Is.EqualTo(actualItems[i].Desc));
-                Assert.That(expectedItems[i].Price, Is.EqualTo(actualItems[i].Price));
+                Assert.That(actualItems[i].Desc, Is.EqualTo(expectedItems[i].Desc));
+                Assert.That(actualItems[i].Price, Is.EqualTo(expectedItems[i].Price));
+                Assert.That(actualItems[i].Sku, Is.EqualTo(expectedItems[i].Sku));
             }
         }
 

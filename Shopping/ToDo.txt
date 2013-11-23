@@ -1,4 +1,5 @@
 ﻿DONE -  full printout of all items with price
 * 2 for price of 1
+* 2 for the price of 1 - order 5 of them
 * x for price
 * printout to include discount lines (in correct places)

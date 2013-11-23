@@ -9,10 +9,12 @@ namespace Shopping
         private readonly PricingRules _rules;
         private readonly ReceiptItems _receiptItems;
         private readonly IReceiptPrinter _receiptPrinter;
+        private readonly SpecialRuleEngine _specialRuleEngine;
 
         public CheckoutTill(PricingRules rules, IReceiptPrinter receiptPrinter)
         {
             _rules = rules;
+            _specialRuleEngine = new SpecialRuleEngine(_rules);
             _receiptItems = new ReceiptItems();
             _receiptPrinter = receiptPrinter;
         }
@@ -20,7 +22,8 @@ namespace Shopping
         public void ScanItem(string sku)
         {
             var price = _rules.GetPriceForSku(sku);
-            _receiptItems.AddReceiptitem(sku, price);
+            _receiptItems.AddReceiptItem(sku, price);
+            _specialRuleEngine.MonitorandApplyDiscountForSku(sku, _receiptItems);
         }
 
         public void OutputReceipt()
@@ -28,6 +31,7 @@ namespace Shopping
             OutputRecieptItems();
             OutputReceiptTotal();
         }
+
 
         private void OutputReceiptTotal()
         {

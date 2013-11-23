@@ -105,10 +105,10 @@ Item   Unit      Special
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Total of 1 simple Item That does not qualify for any rules")]
-        public virtual void TotalOf1SimpleItemThatDoesNotQualifyForAnyRules()
+        [NUnit.Framework.DescriptionAttribute("Total of 1 simple Item That does not qualify for any discount")]
+        public virtual void TotalOf1SimpleItemThatDoesNotQualifyForAnyDiscount()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 1 simple Item That does not qualify for any rules", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 1 simple Item That does not qualify for any discount", ((string[])(null)));
 #line 25
 this.ScenarioSetup(scenarioInfo);
 #line 16
@@ -124,10 +124,10 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Total of 2 same simple Items That do not qualify for any rules")]
-        public virtual void TotalOf2SameSimpleItemsThatDoNotQualifyForAnyRules()
+        [NUnit.Framework.DescriptionAttribute("Total of 2 same simple Items That do not qualify for any discount")]
+        public virtual void TotalOf2SameSimpleItemsThatDoNotQualifyForAnyDiscount()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 2 same simple Items That do not qualify for any rules", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total of 2 same simple Items That do not qualify for any discount", ((string[])(null)));
 #line 30
 this.ScenarioSetup(scenarioInfo);
 #line 16
@@ -188,49 +188,530 @@ this.FeatureBackground();
  testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 48
  testRunner.Then("the total price should be 20.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 49
+ testRunner.And("will contain 3 receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
+                        "Desc",
+                        "Price"});
+            table4.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+            table4.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+            table4.AddRow(new string[] {
+                        "C",
+                        "2 > 20",
+                        "-20"});
+#line 50
+ testRunner.And("the following will be output:", ((string)(null)), table4, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Order multiple items results in receipt with all itemsand prices")]
-        public virtual void OrderMultipleItemsResultsInReceiptWithAllItemsandPrices()
+        [NUnit.Framework.DescriptionAttribute("Order four items which qualify for buy 1 get 1 free")]
+        public virtual void OrderFourItemsWhichQualifyForBuy1Get1Free()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order multiple items results in receipt with all itemsand prices", ((string[])(null)));
-#line 50
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order four items which qualify for buy 1 get 1 free", ((string[])(null)));
+#line 56
 this.ScenarioSetup(scenarioInfo);
 #line 16
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Sku"});
-            table4.AddRow(new string[] {
-                        "A"});
-            table4.AddRow(new string[] {
-                        "B"});
-            table4.AddRow(new string[] {
-                        "C"});
-#line 51
- testRunner.Given("I have the following items:", ((string)(null)), table4, "Given ");
-#line 56
- testRunner.When("I request receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 57
- testRunner.Then("will contain 3 receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table5.AddRow(new string[] {
+                        "C"});
+            table5.AddRow(new string[] {
+                        "C"});
+            table5.AddRow(new string[] {
+                        "C"});
+            table5.AddRow(new string[] {
+                        "C"});
+#line 57
+ testRunner.Given("I have the following items:", ((string)(null)), table5, "Given ");
+#line 63
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 64
+ testRunner.Then("the total price should be 40.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 65
+ testRunner.And("will contain 6 receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
                         "Desc",
                         "Price"});
-            table5.AddRow(new string[] {
-                        "A",
-                        "50"});
-            table5.AddRow(new string[] {
-                        "B",
-                        "30"});
-            table5.AddRow(new string[] {
+            table6.AddRow(new string[] {
+                        "C",
                         "C",
                         "20"});
-#line 58
- testRunner.And("the following will be output:", ((string)(null)), table5, "And ");
+            table6.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+            table6.AddRow(new string[] {
+                        "C",
+                        "2 > 20",
+                        "-20"});
+            table6.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+            table6.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+            table6.AddRow(new string[] {
+                        "C",
+                        "2 > 20",
+                        "-20"});
+#line 66
+ testRunner.And("the following will be output:", ((string)(null)), table6, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order five items which qualify for buy 1 get 1 free")]
+        public virtual void OrderFiveItemsWhichQualifyForBuy1Get1Free()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order five items which qualify for buy 1 get 1 free", ((string[])(null)));
+#line 75
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table7.AddRow(new string[] {
+                        "C"});
+            table7.AddRow(new string[] {
+                        "C"});
+            table7.AddRow(new string[] {
+                        "C"});
+            table7.AddRow(new string[] {
+                        "C"});
+            table7.AddRow(new string[] {
+                        "C"});
+#line 76
+ testRunner.Given("I have the following items:", ((string)(null)), table7, "Given ");
+#line 83
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 84
+ testRunner.Then("the total price should be 60.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order single item which qualify for buy 1 get 1 half price")]
+        public virtual void OrderSingleItemWhichQualifyForBuy1Get1HalfPrice()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order single item which qualify for buy 1 get 1 half price", ((string[])(null)));
+#line 87
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table8.AddRow(new string[] {
+                        "B"});
+#line 88
+ testRunner.Given("I have the following items:", ((string)(null)), table8, "Given ");
+#line 91
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 92
+ testRunner.Then("the total price should be 30.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order two items which qualify for buy 1 get 1 half price")]
+        public virtual void OrderTwoItemsWhichQualifyForBuy1Get1HalfPrice()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order two items which qualify for buy 1 get 1 half price", ((string[])(null)));
+#line 95
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table9.AddRow(new string[] {
+                        "B"});
+            table9.AddRow(new string[] {
+                        "B"});
+#line 96
+ testRunner.Given("I have the following items:", ((string)(null)), table9, "Given ");
+#line 100
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 101
+ testRunner.Then("the total price should be 45.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 102
+ testRunner.And("will contain 3 receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
+                        "Desc",
+                        "Price"});
+            table10.AddRow(new string[] {
+                        "B",
+                        "B",
+                        "30"});
+            table10.AddRow(new string[] {
+                        "B",
+                        "B",
+                        "30"});
+            table10.AddRow(new string[] {
+                        "B",
+                        "2 > 45",
+                        "-15"});
+#line 103
+ testRunner.And("the following will be output:", ((string)(null)), table10, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order four items which qualify for buy 1 get 1 half price")]
+        public virtual void OrderFourItemsWhichQualifyForBuy1Get1HalfPrice()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order four items which qualify for buy 1 get 1 half price", ((string[])(null)));
+#line 109
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table11.AddRow(new string[] {
+                        "B"});
+            table11.AddRow(new string[] {
+                        "B"});
+            table11.AddRow(new string[] {
+                        "B"});
+            table11.AddRow(new string[] {
+                        "B"});
+#line 110
+ testRunner.Given("I have the following items:", ((string)(null)), table11, "Given ");
+#line 116
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 117
+ testRunner.Then("the total price should be 90.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order five items which qualify for buy 1 get 1 half price")]
+        public virtual void OrderFiveItemsWhichQualifyForBuy1Get1HalfPrice()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order five items which qualify for buy 1 get 1 half price", ((string[])(null)));
+#line 119
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table12.AddRow(new string[] {
+                        "B"});
+            table12.AddRow(new string[] {
+                        "B"});
+            table12.AddRow(new string[] {
+                        "B"});
+            table12.AddRow(new string[] {
+                        "B"});
+            table12.AddRow(new string[] {
+                        "B"});
+#line 120
+ testRunner.Given("I have the following items:", ((string)(null)), table12, "Given ");
+#line 127
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 128
+ testRunner.Then("the total price should be 120.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order two items which qualify for buy 3 for £130")]
+        public virtual void OrderTwoItemsWhichQualifyForBuy3For130()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order two items which qualify for buy 3 for £130", ((string[])(null)));
+#line 130
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table13.AddRow(new string[] {
+                        "A"});
+            table13.AddRow(new string[] {
+                        "A"});
+#line 131
+ testRunner.Given("I have the following items:", ((string)(null)), table13, "Given ");
+#line 135
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 136
+ testRunner.Then("the total price should be 100.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order three items which qualify for buy 3 for £130")]
+        public virtual void OrderThreeItemsWhichQualifyForBuy3For130()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order three items which qualify for buy 3 for £130", ((string[])(null)));
+#line 138
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table14.AddRow(new string[] {
+                        "A"});
+            table14.AddRow(new string[] {
+                        "A"});
+            table14.AddRow(new string[] {
+                        "A"});
+#line 139
+ testRunner.Given("I have the following items:", ((string)(null)), table14, "Given ");
+#line 144
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 145
+ testRunner.Then("the total price should be 130.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order 6 items which qualify for buy 3 for £130")]
+        public virtual void Order6ItemsWhichQualifyForBuy3For130()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order 6 items which qualify for buy 3 for £130", ((string[])(null)));
+#line 147
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table15.AddRow(new string[] {
+                        "A"});
+            table15.AddRow(new string[] {
+                        "A"});
+            table15.AddRow(new string[] {
+                        "A"});
+            table15.AddRow(new string[] {
+                        "A"});
+            table15.AddRow(new string[] {
+                        "A"});
+            table15.AddRow(new string[] {
+                        "A"});
+#line 148
+ testRunner.Given("I have the following items:", ((string)(null)), table15, "Given ");
+#line 156
+ testRunner.When("I calculate the total", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 157
+ testRunner.Then("the total price should be 260.00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 158
+ testRunner.And("will contain 8 receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
+                        "Desc",
+                        "Price"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "3 > 130",
+                        "-20"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table16.AddRow(new string[] {
+                        "A",
+                        "3 > 130",
+                        "-20"});
+#line 159
+ testRunner.And("the following will be output:", ((string)(null)), table16, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order multiple items that do not qualify for any special discounts results in rec" +
+            "eipt with all items and prices")]
+        public virtual void OrderMultipleItemsThatDoNotQualifyForAnySpecialDiscountsResultsInReceiptWithAllItemsAndPrices()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order multiple items that do not qualify for any special discounts results in rec" +
+                    "eipt with all items and prices", ((string[])(null)));
+#line 171
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table17.AddRow(new string[] {
+                        "A"});
+            table17.AddRow(new string[] {
+                        "B"});
+            table17.AddRow(new string[] {
+                        "C"});
+#line 172
+ testRunner.Given("I have the following items:", ((string)(null)), table17, "Given ");
+#line 177
+ testRunner.When("I request receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 178
+ testRunner.Then("will contain 3 receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
+                        "Desc",
+                        "Price"});
+            table18.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table18.AddRow(new string[] {
+                        "B",
+                        "B",
+                        "30"});
+            table18.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+#line 179
+ testRunner.And("the following will be output:", ((string)(null)), table18, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Order multiple items that qualify for multiple special discounts results in recei" +
+            "pt with all items and prices and discounts")]
+        public virtual void OrderMultipleItemsThatQualifyForMultipleSpecialDiscountsResultsInReceiptWithAllItemsAndPricesAndDiscounts()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Order multiple items that qualify for multiple special discounts results in recei" +
+                    "pt with all items and prices and discounts", ((string[])(null)));
+#line 185
+this.ScenarioSetup(scenarioInfo);
+#line 16
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku"});
+            table19.AddRow(new string[] {
+                        "A"});
+            table19.AddRow(new string[] {
+                        "B"});
+            table19.AddRow(new string[] {
+                        "C"});
+            table19.AddRow(new string[] {
+                        "A"});
+            table19.AddRow(new string[] {
+                        "B"});
+            table19.AddRow(new string[] {
+                        "C"});
+            table19.AddRow(new string[] {
+                        "A"});
+            table19.AddRow(new string[] {
+                        "B"});
+            table19.AddRow(new string[] {
+                        "C"});
+#line 186
+ testRunner.Given("I have the following items:", ((string)(null)), table19, "Given ");
+#line 197
+ testRunner.When("I request receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 198
+ testRunner.Then("will contain 12 receipt items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Sku",
+                        "Desc",
+                        "Price"});
+            table20.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table20.AddRow(new string[] {
+                        "B",
+                        "B",
+                        "30"});
+            table20.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+            table20.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table20.AddRow(new string[] {
+                        "B",
+                        "B",
+                        "30"});
+            table20.AddRow(new string[] {
+                        "B",
+                        "2 > 45",
+                        "-15"});
+            table20.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+            table20.AddRow(new string[] {
+                        "C",
+                        "2 > 20",
+                        "-20"});
+            table20.AddRow(new string[] {
+                        "A",
+                        "A",
+                        "50"});
+            table20.AddRow(new string[] {
+                        "A",
+                        "3 > 130",
+                        "-20"});
+            table20.AddRow(new string[] {
+                        "B",
+                        "B",
+                        "30"});
+            table20.AddRow(new string[] {
+                        "C",
+                        "C",
+                        "20"});
+#line 199
+ testRunner.And("the following will be output:", ((string)(null)), table20, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

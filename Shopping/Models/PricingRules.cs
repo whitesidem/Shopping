@@ -6,8 +6,8 @@ namespace Shopping.Models
 {
     public class PricingRules 
     {
-        readonly IList<PricingRule> _rules = new List<PricingRule>(); 
-
+        readonly IList<PricingRule> _rules = new List<PricingRule>();
+ 
         public void AddRule(string sku, Decimal price, string rule)
         {
             _rules.Add(new PricingRule(sku, price, rule));
@@ -15,8 +15,14 @@ namespace Shopping.Models
 
         public Decimal GetPriceForSku(string sku)
         {
-            return _rules.Single(r => r.Sku == sku).Price;
+            return GetRuleBySku(sku).Price;
         }
+
+        public PricingRule GetRuleBySku(string sku)
+        {
+            return _rules.Single(r => r.Sku == sku);
+        }
+
 
     }
 }
