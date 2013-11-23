@@ -57,9 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckoutTill.cs" />
-    <Compile Include="ICheckoutTill.cs" />
+    <Compile Include="Interfaces\ICheckoutTill.cs" />
+    <Compile Include="Interfaces\IReceiptPrinter.cs" />
+    <Compile Include="Models\PricingRule.cs" />
+    <Compile Include="Models\PricingRules.cs" />
+    <Compile Include="Models\ReceiptItems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\ReceiptItem.cs" />
     <Compile Include="ShoppingList.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +80,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ShoppingList.feature.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ToDo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

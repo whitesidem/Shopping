@@ -1,58 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Linq;
+using Shopping.Interfaces;
+using Shopping.Models;
 
 namespace Shopping
 {
     internal class CheckoutTill : ICheckoutTill
     {
-        private readonly List<Item> _items = new List<Item>();
-        private readonly List<PricingRule> _rules = new List<PricingRule>();
+        private readonly PricingRules _rules;
+        private readonly ReceiptItems _receiptItems;
+        private readonly IReceiptPrinter _receiptPrinter;
 
-        public decimal CalcTotal()
+        public CheckoutTill(PricingRules rules, IReceiptPrinter receiptPrinter)
         {
-            var total = 0m;
-            foreach (var item in _items)
-            {
-                var price = _rules.Single(r => r.Sku == item.Sku).Price;
-                total += price;
-            }
-            return total;
+            _rules = rules;
+            _receiptItems = new ReceiptItems();
+            _receiptPrinter = receiptPrinter;
+        }
+
+        public void OutputReceiptTotal()
+        {
+            _receiptPrinter.TotalPrice(_receiptItems.TotalPrice);
         }
 
         public void AddItem(string sku)
-        {
-            _items.Add(new Item(sku));
+        {            
+            var price = _rules.GetPriceForSku(sku);
+            _receiptItems.AddReceiptitem(sku, price);
         }
 
-
-        public void AddPricingRule(string sku, decimal price, string rule)
+        public void OutputRecieptItems()
         {
-            _rules.Add(new PricingRule(sku,price,rule));
-        }
-    }
-
-    internal class PricingRule
-    {
-        public string Sku { get; set; }
-        public decimal Price { get; set; }
-        public string Rule { get; set; }
-
-        public PricingRule(string sku, decimal price, string rule)
-        {
-            Sku = sku;
-            Price = price;
-            Rule = rule;
-        }
-    }
-
-    internal class Item
-    {
-        public string Sku { get; set; }
-
-        public Item(string sku)
-        {
-            Sku = sku;
+            _receiptPrinter.ListReciptitems(_receiptItems.ItemEnumerator.ToList());
         }
     }
 }

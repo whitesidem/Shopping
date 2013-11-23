@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Shopping.Interfaces;
+using Shopping.Models;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
 namespace Shopping
 {
     [Binding]
-    public class ShoppingListSteps
+    public class ShoppingListSteps : IReceiptPrinter
     {
         private ICheckoutTill _checkoutTill;
 
@@ -15,17 +18,18 @@ namespace Shopping
         [BeforeScenario] 
         public  void BeforeScenario()
         {
-            _checkoutTill = new CheckoutTill();
         }
 
         [Given(@"the following pricing rules")]
         public void GivenTheFollowingPricingRules(Table table)
         {
+            var pricingRules = new PricingRules();
             var rules = table.CreateDynamicSet().ToList();
             foreach (dynamic rule in rules)
             {
-                _checkoutTill.AddPricingRule((string)rule.Sku, (Decimal)rule.Price, (string)rule.Rule);
+                pricingRules.AddRule((string)rule.Sku, (Decimal)rule.Price, (string)rule.Rule);
             }
+            _checkoutTill = new CheckoutTill(pricingRules, this);
         }
 
 
@@ -54,7 +58,7 @@ namespace Shopping
         [When(@"I calculate the total")]
         public void WhenICalculateTheTotal()
         {
-            ScenarioContext.Current["total"] = _checkoutTill.CalcTotal();
+            _checkoutTill.OutputReceiptTotal();
         }
         
         [Then(@"the total price should be (.*)")]
@@ -63,5 +67,47 @@ namespace Shopping
             var total = ScenarioContext.Current["total"];
             Assert.That(total, Is.EqualTo(expectedTotal));
         }
+
+        [When(@"I request receipt items")]
+        public void WhenIRequestReceiptItems()
+        {
+            _checkoutTill.OutputRecieptItems();
+        }
+
+        [Then(@"will contain (.*) receipt items")]
+        public void ThenWillContainReceiptItems(int qty)
+        {
+            var actualItems = ScenarioContext.Current.Get<IList<ReceiptItem>>("Receptitems");
+            Assert.That(qty, Is.EqualTo(actualItems.Count));
+        }
+
+
+        [Then(@"the following will be output:")]
+        public void ThenTheFollowingWillBeOutput(Table table)
+        {
+            var expectedItems = table.CreateDynamicSet().ToList();
+            var actualItems = ScenarioContext.Current.Get<IList<ReceiptItem>>("Receptitems");
+            for (var i = 0; i < expectedItems.Count; i++)
+            {
+                Assert.That(expectedItems[i].Desc, Is.EqualTo(actualItems[i].Desc));
+                Assert.That(expectedItems[i].Price, Is.EqualTo(actualItems[i].Price));
+            }
+        }
+
+
+        #region IReceiptPrinter sideway shunt
+
+        public void ListReciptitems(List<ReceiptItem> receiptItems)
+        {
+            ScenarioContext.Current["Receptitems"] = receiptItems;
+        }
+
+        public void TotalPrice(decimal totalPrice)
+        {
+            ScenarioContext.Current["total"] = totalPrice;
+        }
+
+        #endregion IReceiptPrinter sideway shunt
+
     }
 }

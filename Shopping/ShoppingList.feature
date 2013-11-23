@@ -32,14 +32,33 @@ Scenario: Total of 2 same simple Items That do not qualify for any rules
 	When I calculate the total
 	Then the total price should be 30.00
 
-Scenario: Total of Multiple different Items That do not qualify for any rules
+Scenario: Order single item which qualify for buy 1 get 1 free
 	Given I have the following items:
 	    | Sku	|  
-		| D	|
-		| A	| 
-		| B	|
-		| D	|
+		| C	| 
 	When I calculate the total
-	Then the total price should be 110.00
+	Then the total price should be 20.00
+
+Scenario: Order two items which qualify for buy 1 get 1 free
+	Given I have the following items:
+	    | Sku	|  
+		| C	|
+		| C	| 
+	When I calculate the total
+	Then the total price should be 20.00
+
+Scenario: Order multiple items results in receipt with all itemsand prices
+	Given I have the following items:
+	    | Sku	|  
+		| A	| 
+		| B	| 
+		| C	| 
+	When I request receipt items
+	Then will contain 3 receipt items
+	And the following will be output:
+	| Desc | Price |
+    | A     | 50   | 
+    | B     | 30   | 
+    | C     | 20   | 
 
 

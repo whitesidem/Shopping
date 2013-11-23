@@ -1,0 +1,4 @@
+﻿* 2 for price of 1
+* x for price
+* full printout of all items with price
+* printout to include discount lines (in correct places)
