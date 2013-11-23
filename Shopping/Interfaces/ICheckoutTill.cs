@@ -6,8 +6,7 @@ namespace Shopping.Interfaces
 {
     internal interface ICheckoutTill
     {
-        void OutputReceiptTotal();
-        void AddItem(string sku);
-        void OutputRecieptItems();
+        void OutputReceipt();
+        void ScanItem(string sku);
     }
 }

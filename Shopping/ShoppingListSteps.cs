@@ -39,7 +39,7 @@ namespace Shopping
         {
             for (var i = 0; i < qty; i++)
             {
-                _checkoutTill.AddItem(sku);
+                _checkoutTill.ScanItem(sku);
             }
         }
 
@@ -49,7 +49,7 @@ namespace Shopping
             var items = table.CreateDynamicSet().ToList();
             foreach (dynamic item in items)
             {
-                _checkoutTill.AddItem((string)item.Sku);
+                _checkoutTill.ScanItem((string)item.Sku);
             }
             // Get<IEnumerable<dynamic>>("Products")
         }
@@ -58,7 +58,7 @@ namespace Shopping
         [When(@"I calculate the total")]
         public void WhenICalculateTheTotal()
         {
-            _checkoutTill.OutputReceiptTotal();
+            _checkoutTill.OutputReceipt();
         }
         
         [Then(@"the total price should be (.*)")]
@@ -71,7 +71,7 @@ namespace Shopping
         [When(@"I request receipt items")]
         public void WhenIRequestReceiptItems()
         {
-            _checkoutTill.OutputRecieptItems();
+            _checkoutTill.OutputReceipt();
         }
 
         [Then(@"will contain (.*) receipt items")]

@@ -17,18 +17,24 @@ namespace Shopping
             _receiptPrinter = receiptPrinter;
         }
 
-        public void OutputReceiptTotal()
+        public void ScanItem(string sku)
         {
-            _receiptPrinter.TotalPrice(_receiptItems.TotalPrice);
-        }
-
-        public void AddItem(string sku)
-        {            
             var price = _rules.GetPriceForSku(sku);
             _receiptItems.AddReceiptitem(sku, price);
         }
 
-        public void OutputRecieptItems()
+        public void OutputReceipt()
+        {
+            OutputRecieptItems();
+            OutputReceiptTotal();
+        }
+
+        private void OutputReceiptTotal()
+        {
+            _receiptPrinter.TotalPrice(_receiptItems.TotalPrice);
+        }
+
+        private void OutputRecieptItems()
         {
             _receiptPrinter.ListReciptitems(_receiptItems.ItemEnumerator.ToList());
         }
